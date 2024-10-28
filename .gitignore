@@ -1,4 +1,4 @@
-virtualenv
+.venv
 __pycache_
 .vscode
 lid218e.bin
