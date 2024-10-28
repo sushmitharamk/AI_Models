@@ -5,7 +5,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 class nnlb:
     @st.cache_resource()
     def predicitions(text):
-        predict_model = fasttext.load_model('lid218e.bin')
+        predict_model = fasttext.load_model('./lid218e.bin')
         predictions = predict_model.predict(text, k = 1)
         input_lang = predictions[0][0].replace('__label__','')
         return input_lang
