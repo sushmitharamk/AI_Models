@@ -1,11 +1,21 @@
 import streamlit as st
 import fasttext
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
+from urllib.request import urlopen
+import gdown
 
 class nnlb:
     @st.cache_resource()
     def predicitions(text):
-        predict_model = fasttext.load_model('https://drive.usercontent.google.com/download?id=1MvoYLMOrgTBnqCY1jAuQ4SoP7dhlkWim&export=download&authuser=0')
+        file_id = "1MvoYLMOrgTBnqCY1jAuQ4SoP7dhlkWim"
+        url = f"https://drive.google.com/uc?id={file_id}"
+        output = "lid218e.bin"
+        gdown.download(url, output, quiet=False)
+        predict_model = fasttext.load_model(output)
+        #prediction = model.predict("some text")
+        #print(prediction)
+
+        #predict_model = fasttext.load_model('https://drive.usercontent.google.com/download?id=1MvoYLMOrgTBnqCY1jAuQ4SoP7dhlkWim&export=download&authuser=0')
         predictions = predict_model.predict(text, k = 1)
         input_lang = predictions[0][0].replace('__label__','')
         return input_lang
